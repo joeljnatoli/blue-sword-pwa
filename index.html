@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<meta name="description" content="Blue Sword Energy — modular waste-to-energy infrastructure powering Bitcoin mining, AI compute and data centres. Low-cost power, on-grid and off-grid.">
+<!-- These get updated automatically from CONFIG.siteUrl below -->
+<link id="meta-canonical" rel="canonical" href="">
+<meta id="meta-ogurl" property="og:url" content="">
+<meta property="og:title" content="Blue Sword Energy — Waste-to-Energy Infrastructure">
+<meta property="og:description" content="Turning plastic waste into low-cost power for Bitcoin, AI compute and data centres.">
+<meta property="og:type" content="website">
+<title>Blue Sword Energy — Waste-to-Energy Infrastructure</title>
+<!-- ===== PWA (installable app) ===== -->
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#0A0B0C">
+<link rel="icon" href="./favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="./icon-apple-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Blue Sword">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700;800&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0B0C;
+  --surface:#101214;
+  --surface-2:#15171A;
+  --border:#1E2125;
+  --border-2:#2A2E33;
+  --orange:#F7931A;
+  --orange-soft:rgba(247,147,26,.10);
+  --blue:#2EA6E6;
+  --blue-soft:rgba(46,166,230,.10);
+  --green:#3FB984;
+  --text:#E8E9EA;
+  --text-muted:#888D92;
+  --text-dim:#54595E;
+  --font-display:'Schibsted Grotesk',sans-serif;
+  --font-body:'Hanken Grotesk',sans-serif;
+  --font-mono:'IBM Plex Mono',monospace;
+  --max:1140px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:var(--font-body);font-size:16.5px;line-height:1.68;font-weight:400;
+  -webkit-font-smoothing:antialiased;letter-spacing:-.005em;
+}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.12;letter-spacing:-.022em}
+section{padding:130px 0;border-top:1px solid var(--border)}
+.mono{font-family:var(--font-mono)}
+.eyebrow{
+  font-family:var(--font-mono);font-size:11.5px;font-weight:500;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--text-dim);display:block;margin-bottom:22px;
+}
+.eyebrow b{color:var(--orange);font-weight:500}
+.eyebrow.b b{color:var(--blue)}
+.section-title{font-size:clamp(28px,3.7vw,42px);font-weight:700;margin-bottom:22px;max-width:18ch}
+.section-intro{color:var(--text-muted);max-width:62ch;font-size:17px}
+.accent{color:var(--orange)}
+
+/* ===== NAV ===== */
+header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,11,12,.72);backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .3s,background .3s}
+header.scrolled{border-bottom-color:var(--border);background:rgba(10,11,12,.92)}
+.nav{max-width:var(--max);margin:0 auto;padding:20px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.brand .mark{width:30px;height:30px;flex:0 0 30px}
+.brand .name{font-family:var(--font-display);font-weight:700;font-size:15px;letter-spacing:-.01em;line-height:1.1}
+.brand .name small{display:block;font-family:var(--font-mono);font-weight:400;font-size:9px;letter-spacing:.2em;color:var(--text-dim);margin-top:3px}
+.nav-links{display:flex;gap:34px;align-items:center}
+.nav-links a{font-size:14px;font-weight:500;color:var(--text-muted);transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--text)}
+.nav-cta{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.btn{font-family:var(--font-display);font-weight:600;font-size:13.5px;letter-spacing:-.005em;padding:11px 19px;border-radius:6px;border:1px solid transparent;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.btn-primary{background:var(--orange);color:#160c00}
+.btn-primary:hover{background:#ffa836}
+.btn-ghost{background:transparent;border-color:var(--border-2);color:var(--text)}
+.btn-ghost:hover{border-color:var(--text-muted)}
+.btn-text{color:var(--text-muted);padding:11px 4px}
+.btn-text:hover{color:var(--orange)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+.hamburger span{width:22px;height:2px;background:var(--text);transition:.3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ===== HERO ===== */
+.hero{padding-top:180px;padding-bottom:120px;border-top:none;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-200px;right:-100px;width:700px;height:700px;background:radial-gradient(circle,var(--orange-soft),transparent 65%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:64px;align-items:center;position:relative}
+.hero h1{font-size:clamp(38px,5.4vw,66px);font-weight:700;letter-spacing:-.03em;margin:6px 0 26px;line-height:1.06}
+.hero h1 em{font-style:normal;color:var(--orange)}
+.hero .sub{font-size:clamp(17px,1.7vw,20px);color:var(--text);font-weight:500;margin-bottom:24px;max-width:34ch}
+.hero p.lede{color:var(--text-muted);font-size:17px;max-width:48ch;margin-bottom:36px}
+.hero-cta{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+
+/* fact sheet */
+.factsheet{border:1px solid var(--border);border-radius:12px;background:var(--surface);overflow:hidden}
+.factsheet .fh{padding:16px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.factsheet .fh span{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim)}
+.factsheet .fh .live{color:var(--green);display:flex;align-items:center;gap:7px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block}
+.frow{display:flex;justify-content:space-between;align-items:baseline;padding:14px 22px;border-bottom:1px solid var(--border);gap:16px}
+.frow:last-child{border-bottom:none}
+.frow .k{font-size:13px;color:var(--text-dim);font-family:var(--font-mono);letter-spacing:.04em}
+.frow .v{font-family:var(--font-display);font-weight:600;font-size:15px;text-align:right}
+.frow .v.o{color:var(--orange)}
+
+/* key facts strip */
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:90px;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.fact{padding:28px 26px;border-right:1px solid var(--border)}
+.fact:last-child{border-right:none}
+.fact .n{font-family:var(--font-display);font-weight:700;font-size:24px;letter-spacing:-.02em;margin-bottom:8px}
+.fact .l{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim)}
+
+/* ===== generic cards ===== */
+.cards{display:grid;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:52px}
+.cards.c2{grid-template-columns:1fr 1fr}
+.cards.c3{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--bg);padding:34px 32px;transition:background .25s}
+.card:hover{background:var(--surface)}
+.card .num{font-family:var(--font-mono);font-size:12.5px;color:var(--orange);margin-bottom:18px;display:block;letter-spacing:.05em}
+.card .ci{width:38px;height:38px;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.card .ci svg{width:26px;height:26px;stroke:var(--blue);fill:none;stroke-width:1.5}
+.card h3{font-size:19px;font-weight:600;margin-bottom:12px}
+.card.blue h3{color:var(--blue)}
+.card p{color:var(--text-muted);font-size:15px;line-height:1.62}
+
+/* ===== process flow ===== */
+.flow-tag{font-family:var(--font-display);font-weight:600;font-size:clamp(18px,2.2vw,24px);margin:0 0 46px;color:var(--text-muted);letter-spacing:-.01em}
+.flow-tag b{font-weight:600;color:var(--text)}
+.flow-tag .o{color:var(--orange)}.flow-tag .b{color:var(--blue)}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.fnode{background:var(--bg);padding:30px 26px;cursor:pointer;transition:background .25s;position:relative}
+.fnode:hover{background:var(--surface)}
+.fnode.active{background:var(--surface-2)}
+.fnode.active::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--orange)}
+.fnode .step{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;color:var(--text-dim);text-transform:uppercase;margin-bottom:14px}
+.fnode .ic{width:34px;height:34px;margin-bottom:16px}
+.fnode .ic svg{width:34px;height:34px;stroke:var(--text-muted);fill:none;stroke-width:1.4;transition:stroke .25s}
+.fnode.active .ic svg{stroke:var(--orange)}
+.fnode h4{font-size:16px;font-weight:600;margin-bottom:8px}
+.fnode .micro{font-size:13px;color:var(--text-muted);line-height:1.5}
+.flow-detail{border:1px solid var(--border);border-radius:12px;padding:32px 34px;margin-top:14px;border-left:2px solid var(--orange)}
+.flow-detail .fd-step{font-family:var(--font-mono);font-size:12px;color:var(--text-dim);letter-spacing:.1em;margin-bottom:10px}
+.flow-detail h4{font-size:20px;color:var(--orange);margin-bottom:12px;font-weight:600}
+.flow-detail p{color:var(--text-muted);font-size:16px;max-width:80ch}
+
+/* ===== stats ===== */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:52px}
+.stat{background:var(--bg);padding:42px 32px;text-align:left}
+.stat .n{font-family:var(--font-display);font-weight:700;font-size:clamp(36px,4.5vw,50px);letter-spacing:-.03em;line-height:1}
+.stat .n.b{color:var(--blue)}.stat .n.o{color:var(--orange)}
+.stat .d{color:var(--text-muted);font-size:14.5px;margin-top:14px;max-width:30ch}
+
+/* ===== calculator ===== */
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:52px}
+.calc-side{background:var(--bg);padding:40px 38px}
+.calc-side h3{font-size:17px;font-weight:600;margin-bottom:4px}
+.calc-side .ph{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;color:var(--text-dim);text-transform:uppercase;margin-bottom:34px}
+.sblock{margin-bottom:34px}
+.sblock .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px}
+.sblock label{font-size:14.5px;font-weight:500;color:var(--text)}
+.sblock .vv{font-family:var(--font-display);font-weight:700;font-size:19px;color:var(--orange)}
+.sblock .vv small{font-size:13px;color:var(--text-muted);font-weight:500;font-family:var(--font-body)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:3px;border-radius:3px;background:var(--border-2);outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;border-radius:50%;background:var(--orange);cursor:pointer;border:3px solid var(--bg);box-shadow:0 0 0 1px var(--orange)}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--orange);cursor:pointer;border:3px solid var(--bg);box-shadow:0 0 0 1px var(--orange)}
+.scale{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:10px;color:var(--text-dim);margin-top:10px;letter-spacing:.04em}
+.seg{display:flex;gap:0;border:1px solid var(--border-2);border-radius:7px;overflow:hidden;margin-top:6px}
+.seg button{flex:1;padding:11px;border:none;border-right:1px solid var(--border-2);background:transparent;color:var(--text-muted);font-family:var(--font-display);font-weight:500;font-size:13px;cursor:pointer;transition:.2s}
+.seg button:last-child{border-right:none}
+.seg button.on{background:var(--surface-2);color:var(--orange)}
+.calc-res{background:var(--surface);padding:40px 38px;display:flex;flex-direction:column}
+.res-hero{padding-bottom:30px;border-bottom:1px solid var(--border);margin-bottom:30px}
+.res-hero .rl{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;color:var(--text-dim);text-transform:uppercase;margin-bottom:14px}
+.res-hero .rv{font-family:var(--font-display);font-weight:700;font-size:clamp(44px,6vw,60px);color:var(--text);line-height:1;letter-spacing:-.03em}
+.res-hero .rv small{font-size:20px;color:var(--text-muted);font-weight:500;font-family:var(--font-body)}
+.res-hero .rsub{font-size:13.5px;color:var(--text-muted);margin-top:14px}
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.rcell .rcl{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.08em;color:var(--text-dim);text-transform:uppercase;margin-bottom:10px}
+.rcell .rcv{font-family:var(--font-display);font-weight:700;font-size:23px;letter-spacing:-.02em}
+.rcell .rcv.o{color:var(--orange)}
+.rcell .rcv small{font-size:13px;color:var(--text-muted);font-weight:500;font-family:var(--font-body)}
+.calc-note{font-family:var(--font-mono);font-size:10.5px;color:var(--text-dim);margin-top:auto;padding-top:28px;line-height:1.6}
+
+/* ===== commercial tabs ===== */
+.tabs{display:flex;gap:4px;margin:52px 0 0;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.tab{padding:15px 22px;border:none;background:transparent;font-family:var(--font-display);font-weight:500;font-size:14.5px;cursor:pointer;color:var(--text-dim);transition:color .2s;position:relative;margin-bottom:-1px}
+.tab.on{color:var(--text)}
+.tab.on::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--orange)}
+.tab:not(.on):hover{color:var(--text-muted)}
+.tab-body{padding:42px 0 0}
+.tab-pane{display:none}
+.tab-pane.show{display:block;animation:fade .3s ease}
+.tab-pane h3{font-size:24px;font-weight:600;margin-bottom:16px}
+.tab-pane p{color:var(--text-muted);font-size:17px;max-width:70ch}
+.tab-pane .tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.tab-pane .tags span{font-family:var(--font-mono);font-size:11px;padding:6px 13px;border:1px solid var(--border-2);border-radius:4px;color:var(--text-muted);letter-spacing:.04em}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ===== expansion ===== */
+.map-wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-top:52px}
+.map-svg{width:100%;height:auto}
+.region{padding:22px 0;border-bottom:1px solid var(--border);cursor:pointer;display:flex;align-items:flex-start;gap:18px;transition:.2s}
+.region:first-child{border-top:1px solid var(--border)}
+.region .rdot{width:9px;height:9px;border-radius:50%;background:var(--text-dim);flex-shrink:0;margin-top:8px;transition:.25s}
+.region.live .rdot{background:var(--green)}
+.region.active .rdot{background:var(--orange)}
+.region:hover h4{color:var(--orange)}
+.region h4{font-size:17px;font-weight:600;margin-bottom:4px;transition:color .2s}
+.region p{font-size:14px;color:var(--text-muted)}
+.region .rstatus{margin-left:auto;font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);flex-shrink:0;margin-top:5px}
+.region.live .rstatus{color:var(--green)}
+.region.active .rstatus{color:var(--orange)}
+
+/* ===== tokens ===== */
+.tokens{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:40px}
+.token{background:var(--bg);padding:26px 22px;text-align:left;transition:background .25s}
+.token:hover{background:var(--surface)}
+.token .sym{font-family:var(--font-display);font-weight:700;font-size:20px;color:var(--text);letter-spacing:-.01em}
+.token .nm{font-size:13px;color:var(--text-muted);margin-top:5px}
+
+/* ===== team ===== */
+.team-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;margin-top:52px}
+.founder .role{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;color:var(--orange);text-transform:uppercase;margin-bottom:14px}
+.founder h3{font-size:26px;font-weight:600;margin-bottom:16px}
+.founder p{color:var(--text-muted);font-size:16px}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.tstat{background:var(--bg);padding:30px 26px}
+.tstat .n{font-family:var(--font-display);font-weight:700;font-size:38px;letter-spacing:-.02em;line-height:1}
+.tstat .n.b{color:var(--blue)}
+.tstat .l{font-size:13px;color:var(--text-muted);margin-top:10px}
+.visit{grid-column:1/-1;background:var(--surface);padding:22px 26px;font-size:14.5px;color:var(--text-muted);line-height:1.6}
+.visit b{color:var(--text);font-weight:600}
+
+/* ===== cta / contact ===== */
+.quote{font-family:var(--font-display);font-weight:600;font-size:clamp(22px,3vw,32px);line-height:1.28;letter-spacing:-.02em;max-width:24ch;margin:0 0 14px}
+.quote .o{color:var(--orange)}.quote .b{color:var(--blue)}
+.cta-box{border:1px solid var(--border);border-radius:12px;padding:46px;margin-top:52px;border-left:2px solid var(--orange)}
+.cta-box h3{font-size:22px;font-weight:600;margin-bottom:14px}
+.cta-box>p{color:var(--text-muted);max-width:70ch}
+.agenda{list-style:none;margin:26px 0 32px;display:grid;gap:14px;max-width:70ch}
+.agenda li{display:flex;gap:14px;color:var(--text-muted);font-size:15.5px}
+.agenda li::before{content:"—";color:var(--orange);flex-shrink:0}
+
+/* ===== footer ===== */
+footer{padding:80px 0 44px;border-top:1px solid var(--border)}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;margin-bottom:56px}
+.foot-grid .lede{color:var(--text-muted);font-size:14.5px;max-width:44ch;margin-top:18px}
+.foot-col h5{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);margin-bottom:18px}
+.foot-col a{display:block;color:var(--text-muted);font-size:14px;margin-bottom:13px;transition:color .2s;width:fit-content}
+.foot-col a:hover{color:var(--orange)}
+.socials{display:flex;gap:10px;margin-top:6px}
+.socials a{width:38px;height:38px;border:1px solid var(--border-2);border-radius:7px;display:flex;align-items:center;justify-content:center;transition:.2s}
+.socials a:hover{border-color:var(--text-muted)}
+.socials svg{width:17px;height:17px;fill:var(--text-muted);transition:fill .2s}
+.socials a:hover svg{fill:var(--text)}
+.foot-bottom{border-top:1px solid var(--border);padding-top:28px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.foot-bottom span{font-family:var(--font-mono);font-size:11px;color:var(--text-dim);letter-spacing:.06em}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:920px){
+  .hero-grid,.calc,.map-wrap,.team-wrap{grid-template-columns:1fr;gap:40px}
+  .cards.c3,.flow,.stats,.facts,.tokens,.tgrid{grid-template-columns:1fr 1fr}
+  .fact:nth-child(2n),.token:nth-child(2n){border-right:none}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .nav-links,.nav-cta .btn-text{display:none}
+  .hamburger{display:flex}
+  .nav-links.open{display:flex;position:absolute;top:72px;left:0;right:0;flex-direction:column;background:var(--bg);padding:24px 32px;border-bottom:1px solid var(--border);gap:20px}
+  section{padding:84px 0}
+  .hero{padding-top:140px;padding-bottom:84px}
+  .cards.c2,.cards.c3,.flow,.stats,.facts,.tokens,.tgrid{grid-template-columns:1fr}
+  .fact,.token{border-right:none;border-bottom:1px solid var(--border)}
+  .rgrid{grid-template-columns:1fr 1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .wrap{padding:0 22px}
+  .cta-box{padding:30px}
+}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <nav class="nav">
+    <a href="#top" class="brand">
+      <svg class="mark" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="8" fill="#F7931A"/><path d="M20 7 L23.5 16 L20 30 L16.5 16 Z" fill="#0A0B0C"/><path d="M20 30 L20 34 M16.5 32.5 L23.5 32.5" stroke="#0A0B0C" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <span class="name">Blue Sword Energy<small>PLASTIC2BITCOIN</small></span>
+    </a>
+    <div class="nav-links" id="navlinks">
+      <a href="#model">Model</a>
+      <a href="#economics">Economics</a>
+      <a href="#tech">Technology</a>
+      <a href="#commercial">Partnership</a>
+      <a href="#expansion">Expansion</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a id="lnk-buy" class="btn btn-text" target="_blank" rel="noopener">Buy $PLX</a>
+      <button id="btn-install" class="btn btn-ghost" style="display:none">Install app</button>
+      <a href="#contact" class="btn btn-primary">Request a briefing</a>
+      <div class="hamburger" id="burger"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+</header>
+
+<!-- iOS install hint (shown only on iOS Safari, where there's no install button) -->
+<div id="ios-hint" style="display:none;position:fixed;left:16px;right:16px;bottom:16px;z-index:200;background:var(--surface-2);border:1px solid var(--border-2);border-radius:12px;padding:14px 16px;font-size:13.5px;color:var(--text);box-shadow:0 12px 40px rgba(0,0,0,.5)">
+  <span style="display:flex;align-items:center;gap:10px;justify-content:space-between">
+    <span>Install this app: tap <b style="color:var(--orange)">Share</b> then <b style="color:var(--orange)">Add to Home Screen</b>.</span>
+    <button id="ios-x" style="background:none;border:none;color:var(--text-muted);font-size:20px;cursor:pointer;line-height:1;padding:0 4px">×</button>
+  </span>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow reveal">Waste-to-Energy Infrastructure</span>
+        <h1 class="reveal">Turning plastic waste into <em>Bitcoin</em>.</h1>
+        <p class="sub reveal">Powering the next generation of digital assets and AI compute.</p>
+        <p class="lede reveal">Energy is the critical bottleneck for the world's most ambitious digital infrastructure. We convert plastic and rubber waste into high-density power at the source — supplementing the grid, or running fully off-grid where it doesn't reach.</p>
+        <div class="hero-cta reveal">
+          <a href="#contact" class="btn btn-primary">Request a briefing</a>
+          <a href="#model" class="btn btn-ghost">Explore the model</a>
+        </div>
+      </div>
+      <div class="factsheet reveal">
+        <div class="fh"><span>Fact Sheet</span><span class="live"><span class="dot"></span>Sharjah · Live</span></div>
+        <div class="frow"><span class="k">Facility</span><span class="v">Sharjah, UAE</span></div>
+        <div class="frow"><span class="k">Status</span><span class="v">Operational MVP</span></div>
+        <div class="frow"><span class="k">Energy cost</span><span class="v o">$0.02–0.04 / kWh</span></div>
+        <div class="frow"><span class="k">Capability</span><span class="v">On-grid &amp; off-grid</span></div>
+        <div class="frow"><span class="k">Scale</span><span class="v">5MW → 100MW+</span></div>
+        <div class="frow"><span class="k">Classification</span><span class="v">ESG · carbon-negative path</span></div>
+      </div>
+    </div>
+
+    <div class="facts">
+      <div class="fact reveal"><div class="n">Live UAE facility</div><div class="l">Operational MVP</div></div>
+      <div class="fact reveal"><div class="n accent">$0.02–0.04</div><div class="l">Target $ / kWh</div></div>
+      <div class="fact reveal"><div class="n">Dual capability</div><div class="l">On-grid &amp; off-grid</div></div>
+      <div class="fact reveal"><div class="n">ESG certified</div><div class="l">Carbon-negative path</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- THE MODEL -->
+<section id="model">
+  <div class="wrap">
+    <span class="eyebrow reveal">The Closed-Loop Model</span>
+    <h2 class="section-title reveal">Where real assets meet virtual assets</h2>
+    <p class="flow-tag reveal"><span class="o">Waste</span> becomes fuel. <b>Fuel becomes</b> <span class="b">power</span>. <b>Power becomes</b> <span class="o">Bitcoin</span>.</p>
+
+    <div class="flow reveal" id="flow">
+      <div class="fnode active" data-stage="0">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 7h16l-1.3 12.2a1.8 1.8 0 01-1.8 1.6H7.1a1.8 1.8 0 01-1.8-1.6L4 7z"/><path d="M9 7V5a3 3 0 016 0v2"/></svg></div>
+        <div class="step">Stage 01 — Input</div>
+        <h4>Plastic &amp; rubber waste</h4>
+        <div class="micro">High-volume feedstock diverted from landfill and incineration.</div>
+      </div>
+      <div class="fnode" data-stage="1">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M6 21h12M8 21V11l-2-2 4-4 4 4-2 2v10M16 21v-7l3-3"/></svg></div>
+        <div class="step">Stage 02 — Convert</div>
+        <h4>Pyrolysis → oil</h4>
+        <div class="micro">Sealed, oxygen-free thermal conversion into usable fuel.</div>
+      </div>
+      <div class="fnode" data-stage="2">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M13 2 4.5 13H11l-1 9 8.5-11H12l1-9z"/></svg></div>
+        <div class="step">Stage 03 — Power</div>
+        <h4>Industrial electricity</h4>
+        <div class="micro">Fuel drives generators producing ultra-low-cost power.</div>
+      </div>
+      <div class="fnode" data-stage="3">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M11.5 2v3M11.5 19v3M7 5h6a3 3 0 010 6H7zM7 11h7a3 3 0 010 6H7zM7 5v12"/></svg></div>
+        <div class="step">Stage 04 — Output</div>
+        <h4>Bitcoin &amp; AI compute</h4>
+        <div class="micro">Power feeds mining and data-centre compute directly.</div>
+      </div>
+    </div>
+    <div class="flow-detail reveal" id="flow-detail"></div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="wrap">
+    <span class="eyebrow reveal">The Energy Scarcity Reality</span>
+    <h2 class="section-title reveal">The grid can't keep pace. We power the gap.</h2>
+    <p class="section-intro reveal">As AI training and Bitcoin mining demand unprecedented power, grid-dependent operators face rising costs, multi-year interconnection delays and pressure to decarbonise. We provide an immediate alternative — reduce grid costs for connected operations, or enable infrastructure where the grid simply doesn't reach.</p>
+    <div class="stats">
+      <div class="stat reveal"><div class="n o" data-count="2" data-suffix="×">0×</div><div class="d">Global data-centre power demand projected to double by 2026</div></div>
+      <div class="stat reveal"><div class="n b" data-count="300" data-suffix="M+">0</div><div class="d">Tons of plastic &amp; rubber waste produced annually as feedstock</div></div>
+      <div class="stat reveal"><div class="n" data-count="0" data-prefix="$0.02" data-suffix="">$0.02</div><div class="d">Per kWh achievable — a fraction of typical grid and diesel rates</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ECONOMICS / CALCULATOR -->
+<section id="economics">
+  <div class="wrap">
+    <span class="eyebrow reveal">Indicative Cost Modelling</span>
+    <h2 class="section-title reveal">Model your deployment economics</h2>
+    <p class="section-intro reveal">Final energy cost depends on the price paid per ton of feedstock, deployment scale and grid connectivity. Adjust the inputs for indicative figures.</p>
+    <div class="calc reveal">
+      <div class="calc-side">
+        <h3>Deployment inputs</h3>
+        <div class="ph">Configure your site</div>
+        <div class="sblock">
+          <div class="top"><label>Plastic feedstock cost</label><div class="vv">$<span id="f-feed">80</span><small> / ton</small></div></div>
+          <input type="range" id="s-feed" min="0" max="200" value="80" step="5">
+          <div class="scale"><span>$0 · waste-positive</span><span>$200</span></div>
+        </div>
+        <div class="sblock">
+          <div class="top"><label>Deployment capacity</label><div class="vv" id="f-mw">20<small> MW</small></div></div>
+          <input type="range" id="s-mw" min="5" max="100" value="20" step="5">
+          <div class="scale"><span>5 MW</span><span>100 MW+</span></div>
+        </div>
+        <div class="sblock" style="margin-bottom:0">
+          <div class="top"><label>Deployment mode</label></div>
+          <div class="seg">
+            <button class="on" data-mode="off">Off-grid</button>
+            <button data-mode="hybrid">Hybrid</button>
+            <button data-mode="on">On-grid supplement</button>
+          </div>
+        </div>
+      </div>
+      <div class="calc-res">
+        <div class="res-hero">
+          <div class="rl">Blended energy cost</div>
+          <div class="rv">$<span id="r-cost">0.030</span><small> /kWh</small></div>
+          <div class="rsub" id="r-vs">≈ 70% below a typical $0.10/kWh grid rate</div>
+        </div>
+        <div class="rgrid">
+          <div class="rcell"><div class="rcl">Annual power output</div><div class="rcv o" id="r-gwh">0<small> GWh</small></div></div>
+          <div class="rcell"><div class="rcl">Annual energy savings*</div><div class="rcv" id="r-save">$0<small>M</small></div></div>
+          <div class="rcell"><div class="rcl">Plastic diverted / yr</div><div class="rcv" id="r-tons">0<small> t</small></div></div>
+          <div class="rcell"><div class="rcl">CO₂ avoided / yr</div><div class="rcv" id="r-co2">0<small> t</small></div></div>
+        </div>
+        <div class="calc-note">* Illustrative model only. Savings benchmarked against a representative $0.10/kWh grid rate at 92% uptime. Actual figures depend on site conditions, feedstock supply and hardware. Not a financial projection.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNOLOGY -->
+<section id="tech">
+  <div class="wrap">
+    <span class="eyebrow b reveal">How It Works</span>
+    <h2 class="section-title reveal">Modular. Scalable. Deployable.</h2>
+    <p class="section-intro reveal">A self-sustaining energy ecosystem built for portability and resilience — deploying wherever your hardware needs to be, grid-connected or completely remote.</p>
+    <div class="cards c3">
+      <div class="card blue reveal"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="11" rx="1.5"/><path d="M3 11h18M8 18v2M16 18v2"/></svg></div><h3>Modular &amp; portable</h3><p>Containerised, transportable units deploy at any site with feedstock access — no permanent grid connection required. Ideal for rapid expansion or remote deployment.</p></div>
+      <div class="card blue reveal"><div class="ci"><svg viewBox="0 0 24 24"><path d="M13 2 4.5 13H11l-1 9 8.5-11H12l1-9z"/></svg></div><h3>Rapid deployment</h3><p>Operational within weeks of site preparation rather than years — enabling aggressive growth timelines for AI and mining fleets, with feedstock partnerships accelerating local supply.</p></div>
+      <div class="card blue reveal"><div class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18"/></svg></div><h3>Global feedstock access</h3><p>Over 300M tons of plastic and rubber waste are produced annually. We assist with local feedstock-sourcing partnerships — ensuring reliable supply chains in any geography.</p></div>
+    </div>
+
+    <div style="margin-top:90px">
+      <span class="eyebrow reveal">Why Blue Sword</span>
+      <h2 class="section-title reveal">An infrastructure edge, end to end</h2>
+      <div class="cards c2">
+        <div class="card reveal"><span class="num">01</span><h3>Radical cost efficiency</h3><p>Profitability in high-performance computing is a direct function of energy cost. Our process generates electricity significantly below market rates — compressing OPEX and accelerating ROI on hardware.</p></div>
+        <div class="card reveal"><span class="num">02</span><h3>On-grid &amp; off-grid flexibility</h3><p>Supplement existing grid connections to cut costs, or deploy completely off-grid in remote regions — unlocking digital infrastructure in rural Africa, Central Asia and other underserved markets.</p></div>
+        <div class="card reveal"><span class="num">03</span><h3>Institutional ESG credibility</h3><p>Turn an environmental liability into a strategic asset. Our process removes plastic and rubber waste from the ecosystem, providing a verifiable green narrative and carbon-credit eligibility.</p></div>
+        <div class="card reveal"><span class="num">04</span><h3>Scalable infrastructure</h3><p>Deploy in 5MW increments or scale to 100MW+. Modular units are built for rapid rollout — expanding compute capacity in weeks, not the years required for traditional grid upgrades.</p></div>
+      </div>
+    </div>
+
+    <div style="margin-top:90px">
+      <span class="eyebrow reveal">Virtual Assets &amp; Tokenisation</span>
+      <h2 class="section-title reveal">Tokenising the physical world</h2>
+      <p class="section-intro reveal">Each real-world component of the system is digitally represented — visualising the ecosystem and aligning digital infrastructure with physical operations.</p>
+      <div class="tokens">
+        <div class="token reveal"><div class="sym">$PLX</div><div class="nm">Plastic — feedstock layer</div></div>
+        <div class="token reveal"><div class="sym">$RBX</div><div class="nm">Rubber — feedstock layer</div></div>
+        <div class="token reveal"><div class="sym">$OILX</div><div class="nm">Oil — intermediate fuel</div></div>
+        <div class="token reveal"><div class="sym">$ELX</div><div class="nm">Electricity — power layer</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMERCIAL -->
+<section id="commercial">
+  <div class="wrap">
+    <span class="eyebrow reveal">Commercial Flexibility</span>
+    <h2 class="section-title reveal">A menu of partnership models</h2>
+    <p class="section-intro reveal">Every operation has a unique capital structure and strategic objective. Select a model to see how it aligns with your goals.</p>
+    <div class="tabs reveal" id="tabs">
+      <button class="tab on">Energy Supply Agreement</button>
+      <button class="tab">Revenue &amp; Profit Sharing</button>
+      <button class="tab">Equity &amp; Token Participation</button>
+      <button class="tab">Hybrid Joint Ventures</button>
+    </div>
+    <div class="tab-body reveal">
+      <div class="tab-pane show"><h3>Energy Supply Agreement (ESA)</h3><p>Fixed-term contracts for dedicated power provision with consumption-linked pricing — offering maximum predictability for your balance sheet and procurement planning.</p><div class="tags"><span>Fixed term</span><span>Consumption-linked</span><span>Balance-sheet friendly</span></div></div>
+      <div class="tab-pane"><h3>Revenue &amp; Profit Sharing</h3><p>Align our incentives with your performance. We participate in the upside of your compute output, reducing your upfront fixed costs and sharing in operational success.</p><div class="tags"><span>Low upfront cost</span><span>Aligned incentives</span><span>Performance-linked</span></div></div>
+      <div class="tab-pane"><h3>Equity &amp; Token Participation</h3><p>For strategic partners, we offer co-investment structures where Blue Sword Energy takes a stake in your project — aligning long-term growth across physical and digital layers.</p><div class="tags"><span>Co-investment</span><span>Long-term alignment</span><span>$PLX ecosystem</span></div></div>
+      <div class="tab-pane"><h3>Hybrid Joint Ventures</h3><p>Custom-built structures combining energy supply with infrastructure co-ownership — tailored to your regulatory, tax and operating environment for maximum strategic fit.</p><div class="tags"><span>Co-ownership</span><span>Bespoke structure</span><span>Tax-optimised</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPANSION -->
+<section id="expansion">
+  <div class="wrap">
+    <span class="eyebrow reveal">Global Expansion</span>
+    <h2 class="section-title reveal">Scaling across continents</h2>
+    <p class="section-intro reveal">From a live foundation in the UAE, we're preparing plastic-to-oil facilities, power generation and mining infrastructure across high-impact regions.</p>
+    <div class="map-wrap">
+      <svg class="map-svg reveal" id="map" viewBox="0 0 500 300" fill="none">
+        <rect width="500" height="300" rx="12" fill="#101214" stroke="#1E2125"/>
+        <g stroke="#1E2125" stroke-width="1"><path d="M0 75h500M0 150h500M0 225h500M125 0v300M250 0v300M375 0v300"/></g>
+        <g fill="#16181B">
+          <path d="M205 80q30-18 58-9q24 8 28 33q5 24-14 43q-24 21-53 11q-29-10-29-43q0-24 10-35z"/>
+          <path d="M295 100q34-14 62 5q24 17 17 48q-8 30-43 33q-34 3-46-24q-11-29 10-67z"/>
+          <path d="M115 112q24-11 43 5q17 17 8 40q-11 27-40 21q-24-6-24-36q0-21 13-31z"/>
+        </g>
+        <g class="mnode" data-region="me" style="cursor:pointer">
+          <circle cx="288" cy="140" r="12" fill="rgba(63,185,132,.15)"/>
+          <circle class="pin" cx="288" cy="140" r="5.5" fill="#3FB984"/>
+          <circle cx="288" cy="140" r="5.5" fill="none" stroke="#3FB984" stroke-width="1.2"><animate attributeName="r" from="6" to="18" dur="2.4s" repeatCount="indefinite"/><animate attributeName="opacity" from=".7" to="0" dur="2.4s" repeatCount="indefinite"/></circle>
+        </g>
+        <g class="mnode" data-region="af" style="cursor:pointer"><circle cx="248" cy="185" r="12" fill="rgba(247,147,26,.08)"/><circle class="pin" cx="248" cy="185" r="5.5" fill="#54595E"/></g>
+        <g class="mnode" data-region="as" style="cursor:pointer"><circle cx="345" cy="140" r="12" fill="rgba(247,147,26,.08)"/><circle class="pin" cx="345" cy="140" r="5.5" fill="#54595E"/></g>
+      </svg>
+      <div>
+        <div class="region live active" data-region="me"><span class="rdot"></span><div><h4>Middle East</h4><p>First operational facility live in Sharjah, UAE — the foundation for expansion.</p></div><span class="rstatus">Live</span></div>
+        <div class="region" data-region="af"><span class="rdot"></span><div><h4>Africa</h4><p>High-waste-volume regions targeted for off-grid digital infrastructure.</p></div><span class="rstatus">Planned</span></div>
+        <div class="region" data-region="as"><span class="rdot"></span><div><h4>Asia &amp; Central Asia</h4><p>Strategic markets for modular waste-to-energy and mining rollout.</p></div><span class="rstatus">Planned</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="wrap">
+    <span class="eyebrow reveal">Built by a Global Execution Team</span>
+    <h2 class="section-title reveal">Real machines. Real facilities. Real execution.</h2>
+    <p class="section-intro reveal">This is not a concept-only project. Our team operates real machines, manages real facilities and executes on the ground — with a clear mission to scale waste-to-energy infrastructure globally.</p>
+    <div class="team-wrap">
+      <div class="founder reveal">
+        <div class="role">Founder &amp; CEO</div>
+        <h3>Ashraf Ismaila Yahya</h3>
+        <p>Founder of Blue Sword Energy, leading a growing global team across energy operations, engineering, logistics, manufacturing and digital infrastructure — building a new category of company from the UAE to the world.</p>
+      </div>
+      <div class="tgrid reveal">
+        <div class="tstat"><div class="n b" data-count="40" data-suffix="+">0</div><div class="l">Professionals, 5 disciplines</div></div>
+        <div class="tstat"><div class="n" data-count="1" data-suffix="">0</div><div class="l">Live facility (UAE)</div></div>
+        <div class="visit">The <b>ambassador of Somaliland</b> and the <b>royal family of the UAE</b> visited the team to explore a swift partnership across the African region.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <p class="quote reveal"><span class="o">Waste</span> becomes fuel. Fuel becomes <span class="b">power</span>. Power becomes <span class="o">Bitcoin</span>.</p>
+    <span class="eyebrow reveal" style="margin-top:40px">Why Now</span>
+    <h2 class="section-title reveal">The window for low-cost energy is closing</h2>
+    <p class="section-intro reveal">We're currently allocating capacity from our UAE expansion and evaluating partners for global deployment across grid-connected and remote markets.</p>
+    <div class="cta-box reveal">
+      <h3>Proposed next step — an exploratory dialogue</h3>
+      <p>We invite you to a 30-minute introductory call to understand your operational constraints and explore whether a strategic alignment exists. We'll cover:</p>
+      <ul class="agenda">
+        <li>Your specific power requirements, geographic priorities and grid-connectivity status.</li>
+        <li>Live data from our Sharjah facility and indicative cost modelling for on-grid or off-grid deployment.</li>
+        <li>Custom commercial structures tailored to your operating model and market context.</li>
+      </ul>
+      <div class="hero-cta">
+        <a id="lnk-contact" class="btn btn-primary">Request a briefing</a>
+        <a id="lnk-proposal" class="btn btn-ghost" target="_blank" rel="noopener">Download mining proposal</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand"><svg class="mark" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="8" fill="#F7931A"/><path d="M20 7 L23.5 16 L20 30 L16.5 16 Z" fill="#0A0B0C"/><path d="M20 30 L20 34 M16.5 32.5 L23.5 32.5" stroke="#0A0B0C" stroke-width="1.8" stroke-linecap="round"/></svg><span class="name">Blue Sword Energy<small>PLASTIC2BITCOIN</small></span></div>
+        <p class="lede">A U.S.-registered energy and technology company operating a live Pyrolysis facility in Sharjah, UAE — delivering modular waste-to-energy infrastructure for Bitcoin mining, AI compute and data-centre operators worldwide.</p>
+        <div class="socials">
+          <a id="lnk-ig" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.2 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.2 8.8 2.2 12 2.2zm0 3.06A4.94 4.94 0 1012 17a4.94 4.94 0 000-9.88zm0 1.8a3.14 3.14 0 110 6.28 3.14 3.14 0 010-6.28zm6.3-1.16a1.15 1.15 0 11-2.3 0 1.15 1.15 0 012.3 0z"/></svg></a>
+          <a id="lnk-x" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.24 2H21.5l-7.27 8.31L22.78 22h-6.69l-5.24-6.85L4.86 22H1.6l7.78-8.89L1.22 2h6.86l4.73 6.26L18.24 2zm-1.17 18h1.8L7.02 3.9H5.08L17.07 20z"/></svg></a>
+          <a id="lnk-tg" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M21.94 4.6l-3.3 15.56c-.25 1.1-.9 1.37-1.82.85l-5.04-3.72-2.43 2.34c-.27.27-.5.5-1 .5l.36-5.08L18 5.36c.4-.36-.09-.56-.62-.2L6.9 12.07l-4.76-1.49c-1.03-.32-1.05-1.03.22-1.53l18.6-7.17c.86-.32 1.62.2 1.34 1.49z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Navigate</h5>
+        <a href="#model">The model</a>
+        <a href="#economics">Cost modelling</a>
+        <a href="#tech">Technology</a>
+        <a href="#commercial">Partnership</a>
+        <a href="#expansion">Expansion</a>
+      </div>
+      <div class="foot-col">
+        <h5>Engage</h5>
+        <a href="#contact">Request a briefing</a>
+        <a id="lnk-buy2" target="_blank" rel="noopener">Buy $PLX</a>
+        <a id="lnk-tg2" target="_blank" rel="noopener">Telegram</a>
+        <a id="lnk-x2" target="_blank" rel="noopener">X / Twitter</a>
+        <a id="lnk-ig2" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Blue Sword Energy · Dubai, UAE · Waste-to-Energy Infrastructure</span>
+      <span>Strictly confidential · Partnership enquiries welcome</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =====================================================================
+   ★ EDIT YOUR LINKS HERE — set your custom domain & all URLs in ONE place
+   Replace the placeholders below with your own domain and links.
+   Everything on the page (buttons, social icons, canonical/OG tags,
+   the proposal PDF, contact action) reads from this single object.
+   ===================================================================== */
+const CONFIG = {
+  // Your custom domain (no trailing slash). Used for canonical + share tags.
+  siteUrl:      "https://www.blueswordenergy.com",
+
+  // Where "Request a briefing" points. Use a mailto: or a contact-form URL.
+  contactUrl:   "mailto:partnerships@blueswordenergy.com?subject=Partnership%20Briefing%20Request",
+
+  // The crypto-mining proposal PDF (host it on your own domain once live).
+  proposalPdf:  "https://www.blueswordenergy.com/proposal.pdf",
+
+  // Token & social links
+  buyToken:     "https://dexscreener.com/solana/6qPwY175YcsFJ37KTvSxxmv7FnMa9J9HgSBYB7xQtRuj",
+  telegram:     "https://t.me/plastic2bitcoin",
+  x:            "https://x.com/blueswordenergy",
+  instagram:    "https://www.instagram.com/blueswordenergy"
+};
+/* ===================================================================== */
+
+/* wire CONFIG into the page */
+(function applyConfig(){
+  const set=(id,href)=>{const el=document.getElementById(id);if(el)el.href=href;};
+  set('lnk-buy',CONFIG.buyToken);   set('lnk-buy2',CONFIG.buyToken);
+  set('lnk-tg',CONFIG.telegram);    set('lnk-tg2',CONFIG.telegram);
+  set('lnk-x',CONFIG.x);            set('lnk-x2',CONFIG.x);
+  set('lnk-ig',CONFIG.instagram);   set('lnk-ig2',CONFIG.instagram);
+  set('lnk-proposal',CONFIG.proposalPdf);
+  set('lnk-contact',CONFIG.contactUrl);
+  const can=document.getElementById('meta-canonical'); if(can)can.href=CONFIG.siteUrl;
+  const og=document.getElementById('meta-ogurl');      if(og)og.content=CONFIG.siteUrl;
+})();
+
+/* ===== PWA: service worker + install ===== */
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('./sw.js').catch(()=>{/* ignore in sandbox/file:// */});
+  });
+}
+let deferredPrompt=null;
+const installBtn=document.getElementById('btn-install');
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();deferredPrompt=e;
+  if(installBtn)installBtn.style.display='inline-flex';
+});
+if(installBtn){
+  installBtn.addEventListener('click',async()=>{
+    if(!deferredPrompt)return;
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt=null;installBtn.style.display='none';
+  });
+}
+window.addEventListener('appinstalled',()=>{if(installBtn)installBtn.style.display='none';});
+/* iOS Safari has no beforeinstallprompt — show a one-time hint */
+(function iosHint(){
+  const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  const standalone=window.navigator.standalone===true||matchMedia('(display-mode: standalone)').matches;
+  const dismissed=document.cookie.indexOf('iosHintDone=1')>-1;
+  if(isIOS&&!standalone&&!dismissed){
+    const h=document.getElementById('ios-hint');if(h){h.style.display='block';
+      document.getElementById('ios-x').addEventListener('click',()=>{h.style.display='none';document.cookie='iosHintDone=1;max-age=2592000;path=/';});}
+  }
+})();
+
+/* nav scroll state + active link */
+const hdr=document.getElementById('hdr');
+const secs=[...document.querySelectorAll('section[id]')];
+const links=[...document.querySelectorAll('#navlinks a')];
+function onScroll(){
+  hdr.classList.toggle('scrolled',scrollY>20);
+  let cur='';secs.forEach(s=>{if(scrollY>=s.offsetTop-130)cur=s.id;});
+  links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+}
+addEventListener('scroll',onScroll);onScroll();
+
+/* mobile menu */
+const burger=document.getElementById('burger'),navlinks=document.getElementById('navlinks');
+burger.addEventListener('click',()=>{burger.classList.toggle('open');navlinks.classList.toggle('open');});
+navlinks.addEventListener('click',e=>{if(e.target.tagName==='A'){burger.classList.remove('open');navlinks.classList.remove('open');}});
+
+/* reveal on scroll */
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* counters */
+const seen=new Set();
+function count(el){
+  if(seen.has(el))return;seen.add(el);
+  const tgt=parseFloat(el.dataset.count),pre=el.dataset.prefix||'',suf=el.dataset.suffix||'';
+  if(el.dataset.prefix){el.textContent=pre+suf;return;}
+  const dur=1100,t0=performance.now();
+  function step(now){const p=Math.min((now-t0)/dur,1),e=1-Math.pow(1-p,3);
+    el.textContent=pre+Math.round(tgt*e)+suf;
+    if(p<1)requestAnimationFrame(step);else el.textContent=pre+tgt+suf;}
+  requestAnimationFrame(step);
+}
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)count(e.target);}),{threshold:.6});
+document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+/* process flow */
+const fdata=[
+  {t:'Plastic & rubber waste — the feedstock',d:'High-volume plastic and rubber waste is collected as feedstock. Instead of being landfilled or burned, it enters a closed-loop system — turning an environmental liability into an energy asset. The model is most powerful in regions with high waste volumes and low feedstock cost.'},
+  {t:'Pyrolysis → oil — sealed thermal conversion',d:'Waste is processed in a sealed, oxygen-free environment using advanced thermal conversion and transformed into usable fuel rather than being incinerated. This is the core technology that bridges waste and energy — clean, contained and continuous.'},
+  {t:'Industrial electricity — ultra-low-cost power',d:'The fuel produced drives industrial generators creating electricity at costs as low as $0.02–$0.04 per kWh. This power can supplement an existing grid connection to cut costs, or run a site completely off-grid where the grid does not reach.'},
+  {t:'Bitcoin & AI compute — digital value',d:'That electricity feeds crypto-mining rigs and data-centre compute, converting energy into Bitcoin deposited straight to a wallet — or powering AI training fleets. Waste, energy and digital value, joined in one closed loop.'}
+];
+const fnodes=[...document.querySelectorAll('.fnode')],fdetail=document.getElementById('flow-detail');
+function stage(i){
+  fnodes.forEach((n,j)=>n.classList.toggle('active',j===i));
+  fdetail.innerHTML='<div class="fd-step">Stage 0'+(i+1)+'</div><h4>'+fdata[i].t+'</h4><p>'+fdata[i].d+'</p>';
+}
+fnodes.forEach((n,i)=>n.addEventListener('click',()=>stage(i)));
+stage(0);
+
+/* calculator */
+const sFeed=document.getElementById('s-feed'),sMw=document.getElementById('s-mw');let mode='off';
+const fmt=n=>n.toLocaleString('en-US');
+function calc(){
+  const feed=+sFeed.value,mw=+sMw.value;
+  document.getElementById('f-feed').textContent=feed;
+  document.getElementById('f-mw').innerHTML=mw+(mw>=100?'+':'')+'<small> MW</small>';
+  let cost=0.02+(feed/200)*0.02;
+  if(mode==='hybrid')cost=cost*0.6+0.10*0.4;
+  if(mode==='on')cost=cost*0.4+0.10*0.6;
+  const uptime=0.92,kwh=mw*1000*8760*uptime,grid=0.10;
+  const save=(grid-cost)*kwh,tons=kwh/5000,co2=tons*2.5;
+  document.getElementById('r-cost').textContent=cost.toFixed(3);
+  const pct=Math.round((1-cost/grid)*100);
+  document.getElementById('r-vs').textContent=pct>0?('≈ '+pct+'% below a typical $0.10/kWh grid rate'):'blended with grid supply';
+  document.getElementById('r-gwh').innerHTML=(kwh/1e6).toFixed(0)+'<small> GWh</small>';
+  document.getElementById('r-save').innerHTML='$'+(save/1e6).toFixed(1)+'<small>M</small>';
+  document.getElementById('r-tons').innerHTML=fmt(Math.round(tons/100)*100)+'<small> t</small>';
+  document.getElementById('r-co2').innerHTML=fmt(Math.round(co2/100)*100)+'<small> t</small>';
+}
+sFeed.addEventListener('input',calc);sMw.addEventListener('input',calc);
+document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.seg button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');mode=b.dataset.mode;calc();
+}));
+calc();
+
+/* tabs */
+const tabs=[...document.querySelectorAll('.tab')],panes=[...document.querySelectorAll('.tab-pane')];
+tabs.forEach((t,i)=>t.addEventListener('click',()=>{
+  tabs.forEach(x=>x.classList.remove('on'));t.classList.add('on');
+  panes.forEach((p,j)=>p.classList.toggle('show',i===j));
+}));
+
+/* expansion regions */
+const regions=[...document.querySelectorAll('.region')],mnodes=[...document.querySelectorAll('.mnode')];
+function selRegion(id){
+  regions.forEach(r=>r.classList.toggle('active',r.dataset.region===id));
+  mnodes.forEach(n=>{const pin=n.querySelector('.pin'),live=n.dataset.region==='me';
+    if(n.dataset.region===id){pin.setAttribute('fill','#F7931A');pin.setAttribute('r','6.5');}
+    else{pin.setAttribute('fill',live?'#3FB984':'#54595E');pin.setAttribute('r','5.5');}});
+}
+regions.forEach(r=>r.addEventListener('click',()=>selRegion(r.dataset.region)));
+mnodes.forEach(n=>n.addEventListener('click',()=>selRegion(n.dataset.region)));
+</script>
+</body>
+</html>

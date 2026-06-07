@@ -1,0 +1,18 @@
+{
+  "name": "Blue Sword Energy — Waste-to-Energy Infrastructure",
+  "short_name": "Blue Sword",
+  "description": "Modular waste-to-energy infrastructure powering Bitcoin mining, AI compute and data centres. Low-cost power, on-grid and off-grid.",
+  "id": "/",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0A0B0C",
+  "theme_color": "#0A0B0C",
+  "categories": ["business", "finance", "utilities"],
+  "icons": [
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
